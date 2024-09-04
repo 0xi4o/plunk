@@ -7,16 +7,16 @@ if [ -z "${API_URI}" ]; then
     exit 1
 fi
 
-# if [ -z "${AWS_REGION}" ]; then
-#     echo "AWS_REGION is not set. Exiting..."
-#     exit 1
-# fi
+if [ -z "${AWS_REGION}" ]; then
+    echo "AWS_REGION is not set. Exiting..."
+    exit 1
+fi
 
 # Find and replace baked values with real values for API_URI and AWS_REGION
 find /app/packages/dashboard/public /app/packages/dashboard/.next -type f -name "*.js" |
 while read file; do
     sed -i "s|PLUNK_API_URI|${API_URI}|g" "$file"
-    # sed -i "s|AWS_REGION|${AWS_REGION}|g" "$file"
+    sed -i "s|AWS_REGION|${AWS_REGION}|g" "$file"
 done
 
 echo "Environment Variables Baked."

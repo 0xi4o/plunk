@@ -11,7 +11,7 @@ fi
 find /app/packages/dashboard/public /app/packages/dashboard/.next -type f -name "*.js" |
 while read file; do
     sed -i "s|PLUNK_API_URI|${API_URI}|g" "$file"
-    sed -i "s|NEXT_PUBLIC_AWS_REGION|${AWS_REGION}|g" "$file"
+    sed -i "s|NEXT_PUBLIC_AWS_REGION|\"${AWS_REGION}\"|g" "$file"
 done
 
 echo "Environment Variables Baked."
